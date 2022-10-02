@@ -1,13 +1,13 @@
 import { Avatar } from "@mui/material";
 import React, { useEffect } from "react";
 import { auth } from "../firebase/config";
-import { Button, Container, InputGroup } from "reactstrap";
+import { Button } from "reactstrap";
 import { signOut } from "firebase/auth";
 import "../index.css";
 import { ThemeContext, themes } from "../hooks/theme";
 import "./Title.css";
 
-function Title({ signed, setSigned, setUser, user,quote,darkMode,setDarkMode }) {
+function Title ({ signed, setSigned, setUser, user, quote, darkMode, setDarkMode }) {
   const signout = () => {
     signOut(auth)
       .then(() => {
@@ -37,26 +37,24 @@ function Title({ signed, setSigned, setUser, user,quote,darkMode,setDarkMode }) 
               </button>
             )}
           </div>
-          <InputGroup>
-            <ThemeContext.Consumer>
-              {({ changeTheme }) => (
-                <Button
-                  className="mode"
-                  color="black"
-                  onClick={() => {
-                    setDarkMode(!darkMode);
-                    changeTheme(darkMode ? themes.light : themes.dark);
-                  }}
-                >
-                  <i
-                    className={
-                      darkMode ? "fas fa-sun fa-2x" : "fas fa-moon fa-2x"
-                    }
-                  ></i>
-                </Button>
-              )}
-            </ThemeContext.Consumer>
-          </InputGroup>
+          <ThemeContext.Consumer>
+            {({ changeTheme }) => (
+              <Button
+                className="mode"
+                color="black"
+                onClick={() => {
+                  setDarkMode(!darkMode);
+                  changeTheme(darkMode ? themes.light : themes.dark);
+                }}
+              >
+                <i
+                  className={
+                    darkMode ? "fas fa-sun fa-2x" : "fas fa-moon fa-2x"
+                  }
+                ></i>
+              </Button>
+            )}
+          </ThemeContext.Consumer>
         </div>
       </div>
       <h2>Your Pictures</h2>
